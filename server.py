@@ -1,7 +1,8 @@
 from socket import *
 import threading
 
-STATUS_USERNAME_APPENDED = 100
+STATUS_CLIENT_JOINED_CHAT = 100
+STATUS_USERNAME_APPENDED = 102
 STATUS_CONNECTED_TO_SERVER = 200
 STATUS_CONNECTED_TO_CLIENT = 202
 STATUS_DISCONNECTED_FROM_SERVER = 204
@@ -64,7 +65,8 @@ def receive():
         
         user_appended_response = "(" + str(STATUS_USERNAME_APPENDED) + ") " + f"Username of the client is {username}!"
         print(user_appended_response)
-        broadcast(f'{username} joined the chat!'.encode('utf-8'))
+        user_join_chat_response = "(" + str(STATUS_CLIENT_JOINED_CHAT) + ") " + f'{username} joined the chat!'
+        broadcast(user_join_chat_response.encode('utf-8'))
         conected_to_server_response = "(" + str(STATUS_CONNECTED_TO_SERVER) + ") " + 'Conected to the server!'
         client.send(conected_to_server_response.encode('utf-8'))
 
